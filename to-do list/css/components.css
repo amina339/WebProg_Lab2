@@ -1,0 +1,76 @@
+/* форма добавления */
+.task-form {
+  display: flex;
+  gap: 10px;
+}
+
+.task-form__input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #000;
+  font-size: 14px;
+}
+
+/* кнопки */
+.btn {
+  padding: 8px 16px;
+  border: 2px solid #000;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: #000;
+  color: #fff;
+}
+
+/* инструменты */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* фильтры */
+.filters {
+  display: flex;
+  gap: 5px;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  border: 2px solid #000;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: #000;
+  color: #fff;
+}
+
+/* поиск */
+.search {
+  flex: 1;
+  padding: 6px 12px;
+  border: 2px solid #000;
+  font-size: 13px;
+}
+
+/* список задач */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* сообщение "задач нет" */
+.empty-message {
+  color: #666;
+  text-align: center;
+  padding: 20px;
+}
