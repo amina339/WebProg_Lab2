@@ -122,3 +122,18 @@
 .task-item_done .task-item_date {
   color: #ccc;
 }
+
+/* стиль кнопки редактирования */
+.task-item_edit {
+  padding: 4px 10px;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.task-item_edit-input {
+  padding: 6px 10px;
+  border: 2px solid #000;
+  font-size: 14px;
+}
