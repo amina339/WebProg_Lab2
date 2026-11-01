@@ -127,6 +127,10 @@ function showTasks() {
     li.className = 'task-item';
     li.dataset.id = task.id;
 
+    if (task.done) {
+    li.classList.add('task-item_done');
+    }
+
     // галочка "выполнено"
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
