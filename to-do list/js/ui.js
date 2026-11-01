@@ -102,4 +102,54 @@ function buildApp() {
 
   // вставляем всё в body
   document.body.append(app);
+
+}
+
+// выводит все задачи на страницу
+function showTasks() {
+  const taskList = document.getElementById('taskList');
+  const emptyMessage = document.getElementById('emptyMessage');
+
+  // очищаем список
+  taskList.replaceChildren();
+
+  // если задач нет — показываем сообщение
+  if (tasks.length === 0) {
+    emptyMessage.style.display = 'block';
+    return;
+  }
+
+  emptyMessage.style.display = 'none';
+
+  // создаём элемент для каждой задачи
+  tasks.forEach(task => {
+    const li = document.createElement('li');
+    li.className = 'task-item';
+    li.dataset.id = task.id;
+
+    // галочка "выполнено"
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'task-item_checkbox';
+    checkbox.checked = task.done;
+
+    // название задачи
+    const title = document.createElement('span');
+    title.className = 'task-item_title';
+    title.textContent = task.title;
+
+    // дата
+    const date = document.createElement('span');
+    date.className = 'task-item_date';
+    date.textContent = task.date;
+
+    // кнопка удалить
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn task-item_delete';
+    deleteBtn.type = 'button';
+    deleteBtn.textContent = 'x';
+
+    li.append(checkbox, title, date, deleteBtn);
+    taskList.append(li);
+  });
 }
