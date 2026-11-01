@@ -103,4 +103,92 @@ function initEvents() {
     showTasks();              
   });
 
+  //drag and drop
+  let draggedTaskId = null; // айди задачи которую тащим
+
+  // начали тащить
+  taskList.addEventListener('dragstart', (event) => {
+    const li = event.target.closest('.task-item');
+    if (li) {
+      draggedTaskId = li.dataset.id;
+      li.classList.add('dragging'); // добавляем класс для визуальной красоты
+    }
+  });
+
+  // закончили тащить 
+  taskList.addEventListener('dragend', (event) => {
+    const li = event.target.closest('.task-item');
+    if (li) {
+      li.classList.remove('dragging');
+    }
+
+    document.querySelectorAll('.task-item').forEach(item => {
+    item.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+
+  });
+
+  // тащим над другой задачей 
+  taskList.addEventListener('dragover', (event) => {
+    event.preventDefault(); // отменяем стандартное поведение браузера
+
+        // Находим задачу, над которой сейчас курсор
+    const targetLi = event.target.closest('.task-item');
+    
+    // Убираем полоски со всех остальных задач
+    document.querySelectorAll('.task-item').forEach(item => {
+        item.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+
+    // Если курсор над задачей и это не та задача, которую мы тащим
+    if (targetLi && targetLi.dataset.id !== draggedTaskId) {
+        // Вычисляем, над верхней или нижней половиной задачи находится курсор
+        const rect = targetLi.getBoundingClientRect();
+        const middle = rect.y + rect.height / 2;
+        
+        if (event.clientY < middle) {
+        targetLi.classList.add('drag-over-top'); // Если мышка сверху — полоска сверху
+        } else {
+        targetLi.classList.add('drag-over-bottom'); // Если снизу — полоска снизу
+        }
+    }
+  });
+
+  // бросили задачу
+  taskList.addEventListener('drop', (event) => {
+    event.preventDefault();
+    const targetLi = event.target.closest('.task-item');
+    
+    // если бросили не на задачу или на ту же самую — ничего не делаем
+    if (!targetLi || !draggedTaskId) return;
+    
+    const targetId = targetLi.dataset.id;
+    if (targetId === draggedTaskId) return;
+
+    // бросили: выше или ниже середины блока
+    const isDropTop = targetLi.classList.contains('drag-over-top');
+
+    const fromIndex = tasks.findIndex(t => t.id === draggedTaskId);
+    
+    // Вырезаем задачу из старой позиции
+    const [movedTask] = tasks.splice(fromIndex, 1);
+
+    // Находим новую позицию  задачи
+    let toIndex = tasks.findIndex(t => t.id === targetId);
+
+    // Если бросили в нижнюю половину — вставляем после задачи
+    if (!isDropTop) {
+      toIndex = toIndex + 1;
+    }
+
+    tasks.splice(toIndex, 0, movedTask);
+
+    // Очищаем классы и перерисовываем
+    document.querySelectorAll('.task-item').forEach(item => {
+      item.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+    saveTasks();   
+    showTasks();   
+  });
+
 }
