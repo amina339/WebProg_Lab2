@@ -84,8 +84,23 @@ function initEvents() {
   const searchInput = document.getElementById('searchInput');
   
   searchInput.addEventListener('input', () => {
-    currentSearch = searchInput.value.trim();
+    currentSearch = searchInput.value.trim(); //совпадение по названию
     showTasks();
+  });
+
+  const sortButton = document.getElementById('sortButton');
+  
+  sortButton.addEventListener('click', () => {
+    sortTasksByDate();        
+    isAscending = !isAscending; // переключаем направление при нажатии
+
+    if (isAscending) {
+      sortButton.textContent = 'Сортировать по дате ↑'; // старые сначала
+    } else {
+      sortButton.textContent = 'Сортировать по дате ↓'; // новые сначала
+    }
+
+    showTasks();              
   });
 
 }
