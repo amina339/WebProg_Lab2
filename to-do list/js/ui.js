@@ -153,7 +153,56 @@ function showTasks() {
     deleteBtn.type = 'button';
     deleteBtn.textContent = 'x';
 
-    li.append(checkbox, title, date, deleteBtn);
+    const editBtn = document.createElement('button');
+    editBtn.className = 'btn task-item_edit';
+    editBtn.type = 'button';
+    editBtn.textContent = '✎';
+
+    li.append(checkbox, title, date, editBtn, deleteBtn);
     taskList.append(li);
   });
+}
+
+// создаёт форму редактирования для задачи
+function createEditForm(task, onSave) {
+  const form = document.createElement('div');
+  form.className = 'task-edit-form';
+
+  const titleInput = document.createElement('input');
+  titleInput.className = 'task-item_edit-input';
+  titleInput.type = 'text';
+  titleInput.value = task.title;
+  titleInput.name = 'editTitle'; 
+
+  const dateInput = document.createElement('input');
+  dateInput.className = 'task-item_edit-input';
+  dateInput.type = 'date';
+  dateInput.value = task.date;
+  dateInput.name = 'editDate'; 
+
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'btn task-item_save';
+  saveBtn.type = 'button';
+  saveBtn.textContent = 'Сохранить';
+
+  const cancelBtn = document.createElement('button');
+  cancelBtn.className = 'btn task-item_cancel';
+  cancelBtn.type = 'button';
+  cancelBtn.textContent = 'Отмена';
+
+  form.append(titleInput, dateInput, saveBtn, cancelBtn);
+
+  // при сохранении передаём значения в onSave
+  saveBtn.addEventListener('click', () => {
+    const newTitle = titleInput.value.trim();
+    const newDate = dateInput.value;
+    if (!newTitle || !newDate) return;
+    onSave(newTitle, newDate);
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    showTasks();   // просто перерисовать
+  });
+
+  return form;
 }
