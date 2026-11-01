@@ -9,3 +9,8 @@ function addTask(title, date) {
   tasks.push(newTask);
   saveTasks();
 }
+
+function deleteTask(id) {
+  tasks = tasks.filter(task => task.id !== id);
+  saveTasks();
+}
