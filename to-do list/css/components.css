@@ -30,7 +30,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  align-items: center;
 }
 
 /* фильтры */
@@ -136,4 +135,13 @@
   padding: 6px 10px;
   border: 2px solid #000;
   font-size: 14px;
+}
+
+/* Полоска-ориентир, куда вставится задача */
+.task-item.drag-over-top {
+  border-top: 4px solid #000; 
+}
+
+.task-item.drag-over-bottom {
+  border-bottom: 4px solid #000;
 }
