@@ -18,7 +18,7 @@ function initEvents() {
     }
 
     addTask(title, date);
-    renderTasks();
+    showTasks();
 
     titleInput.value = '';
     dateInput.value = '';
@@ -26,11 +26,11 @@ function initEvents() {
 
   // клики внутри списка задач
   taskList.addEventListener('click', (event) => {
-    const deleteBtn = event.target.closest('.task-item__delete');
+    const deleteBtn = event.target.closest('.task-item_delete');
     if (deleteBtn) {
-      const id = Number(deleteBtn.closest('.task-item').dataset.id);
+      const id = deleteBtn.closest('.task-item').dataset.id;
       deleteTask(id);
-      renderTasks();
+      showTasks();
     }
   });
 }
