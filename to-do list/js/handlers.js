@@ -29,18 +29,37 @@ function initEvents() {
   // клики внутри списка задач
   taskList.addEventListener('click', (event) => {
 
-    const deleteBtn = event.target.closest('.task-item_delete');
+    const deleteBtn = event.target.closest('.task-item_delete'); //удаление задачи
     if (deleteBtn) {
       const id = deleteBtn.closest('.task-item').dataset.id;
       deleteTask(id);
       showTasks();
     }
 
-    const checkbox = event.target.closest('.task-item_checkbox');
+    const checkbox = event.target.closest('.task-item_checkbox'); //выполнение задачи
     if (checkbox) {
         const id = checkbox.closest('.task-item').dataset.id;
         toggleDone(id);
         showTasks();
+    }
+
+    const editBtn = event.target.closest('.task-item_edit'); //редактирование задачи
+    if (editBtn) {
+        
+    const li = editBtn.closest('.task-item');
+    const id = li.dataset.id;
+    const task = tasks.find(t => t.id === id);
+
+    // очищаем li и вставляем форму из ui.js
+    console.log('task найден:', task);  
+    li.replaceChildren();
+    li.append(createEditForm(task, (newTitle, newDate) => {
+        console.log('editTask вызов:', id, newTitle, newDate);   // ← временно
+        editTask(id, newTitle, newDate);
+        showTasks();
+    }));
+
+    return;
     }
 
   });
