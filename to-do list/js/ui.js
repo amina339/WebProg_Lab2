@@ -147,6 +147,7 @@ function showTasks() {
     const li = document.createElement('li');
     li.className = 'task-item';
     li.dataset.id = task.id;
+    li.draggable = true; 
 
     if (task.done) {
     li.classList.add('task-item_done');
