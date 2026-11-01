@@ -23,3 +23,13 @@ function toggleDone(id) {
     saveTasks();
   }
 }
+
+// Редактирование задачи
+function editTask(id, newTitle, newDate) {
+  const task = tasks.find(t => t.id === id);
+  if (task) {
+    task.title = newTitle;
+    task.date = newDate;
+    saveTasks();
+  }
+}
