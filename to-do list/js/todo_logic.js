@@ -10,7 +10,16 @@ function addTask(title, date) {
   saveTasks();
 }
 
-function deleteTask(id) {
+function deleteTask(id) { //удаление задачи
   tasks = tasks.filter(task => task.id !== id);
   saveTasks();
+}
+
+// переключает статус задачи: выполнена / не выполнена
+function toggleDone(id) {
+  const task = tasks.find(t => t.id === id);
+  if (task) {
+    task.done = !task.done;
+    saveTasks();
+  }
 }
