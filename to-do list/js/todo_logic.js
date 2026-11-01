@@ -33,3 +33,27 @@ function editTask(id, newTitle, newDate) {
     saveTasks();
   }
 }
+
+// сортировка по датам
+function sortTasksByDate() {
+  tasks.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    
+    let result = 0;
+    if (dateA < dateB) {
+      result = -1;
+    } else if (dateA > dateB) {
+      result = 1;
+    }
+
+    if (isAscending) {
+      return result;
+    } else {
+      return result * -1;
+    }
+
+    });
+
+    saveTasks(); 
+}
