@@ -23,7 +23,7 @@ function initEvents() {
 
     titleInput.value = '';
     dateInput.value = '';
-    
+
   });
 
   // клики внутри списка задач
@@ -38,7 +38,7 @@ function initEvents() {
 
     const checkbox = event.target.closest('.task-item_checkbox');
     if (checkbox) {
-        const id = Number(checkbox.closest('.task-item').dataset.id);
+        const id = checkbox.closest('.task-item').dataset.id;
         toggleDone(id);
         showTasks();
     }
