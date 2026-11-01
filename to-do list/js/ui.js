@@ -1,5 +1,6 @@
-let currentFilter = 'all';
-let currentSearch = '';
+let currentFilter = 'all'; //глобальная переменная фильтра
+let currentSearch = ''; // глобальная переменная поиска
+let isAscending = true; // глобальная переменная сортировки
 
 // создает всю структуру приложения
 function buildApp() {
@@ -85,7 +86,7 @@ function buildApp() {
   sortButton.className = 'btn';
   sortButton.type = 'button';
   sortButton.id = 'sortButton';
-  sortButton.textContent = 'Сортировать по дате';
+  sortButton.textContent = 'Сортировать по дате ↑';
 
   toolbar.append(filters, search, sortButton);
 
