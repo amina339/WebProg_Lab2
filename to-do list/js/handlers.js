@@ -1,5 +1,6 @@
 // вешает обработчики на форму и кнопки
 function initEvents() {
+
   const taskForm = document.getElementById('taskForm');
   const taskList = document.getElementById('taskList');
 
@@ -22,15 +23,26 @@ function initEvents() {
 
     titleInput.value = '';
     dateInput.value = '';
+    
   });
 
   // клики внутри списка задач
   taskList.addEventListener('click', (event) => {
+
     const deleteBtn = event.target.closest('.task-item_delete');
     if (deleteBtn) {
       const id = deleteBtn.closest('.task-item').dataset.id;
       deleteTask(id);
       showTasks();
     }
+
+    const checkbox = event.target.closest('.task-item_checkbox');
+    if (checkbox) {
+        const id = Number(checkbox.closest('.task-item').dataset.id);
+        toggleDone(id);
+        showTasks();
+    }
+
   });
+
 }
