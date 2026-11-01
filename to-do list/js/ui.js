@@ -1,3 +1,6 @@
+let currentFilter = 'all';
+let currentSearch = '';
+
 // создает всю структуру приложения
 function buildApp() {
   const app = document.createElement('div');
@@ -107,14 +110,31 @@ function buildApp() {
 
 // выводит все задачи на страницу
 function showTasks() {
+
   const taskList = document.getElementById('taskList');
   const emptyMessage = document.getElementById('emptyMessage');
+
+  let visibleTasks = tasks;
+
+  // Фильтруем по статусу (кнопки Все/Активные/Выполненные)
+  if (currentFilter === 'active') {
+    visibleTasks = visibleTasks.filter(task => !task.done);
+  } else if (currentFilter === 'done') {
+    visibleTasks = visibleTasks.filter(task => task.done);
+  }
+
+  // Фильтруем по поиску (по названию)
+  if (currentSearch) {
+    visibleTasks = visibleTasks.filter(task => 
+      task.title.toLowerCase().includes(currentSearch.toLowerCase())
+    );
+  }
 
   // очищаем список
   taskList.replaceChildren();
 
   // если задач нет — показываем сообщение
-  if (tasks.length === 0) {
+  if (visibleTasks.length === 0) {
     emptyMessage.style.display = 'block';
     return;
   }
@@ -122,7 +142,7 @@ function showTasks() {
   emptyMessage.style.display = 'none';
 
   // создаём элемент для каждой задачи
-  tasks.forEach(task => {
+  visibleTasks.forEach(task => {
     const li = document.createElement('li');
     li.className = 'task-item';
     li.dataset.id = task.id;
