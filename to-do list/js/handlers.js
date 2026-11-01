@@ -50,11 +50,9 @@ function initEvents() {
     const id = li.dataset.id;
     const task = tasks.find(t => t.id === id);
 
-    // очищаем li и вставляем форму из ui.js
-    console.log('task найден:', task);  
+    // очищаем li и вставляем форму из ui.js 
     li.replaceChildren();
     li.append(createEditForm(task, (newTitle, newDate) => {
-        console.log('editTask вызов:', id, newTitle, newDate);   // ← временно
         editTask(id, newTitle, newDate);
         showTasks();
     }));
@@ -62,6 +60,32 @@ function initEvents() {
     return;
     }
 
+  });
+
+  const filtersContainer = document.querySelector('.filters');
+  
+  filtersContainer.addEventListener('click', (event) => {
+    const btn = event.target.closest('.filter-btn');
+    if (!btn) return;
+
+    // Убираем класс active у всех кнопок
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    
+    // Добавляем active на нажатую
+    btn.classList.add('active');
+
+    // Меняем глобальную переменную
+    currentFilter = btn.dataset.filter;
+
+    // Перерисовываем список
+    showTasks();
+  });
+
+  const searchInput = document.getElementById('searchInput');
+  
+  searchInput.addEventListener('input', () => {
+    currentSearch = searchInput.value.trim();
+    showTasks();
   });
 
 }
