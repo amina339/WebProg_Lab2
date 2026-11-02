@@ -7,8 +7,8 @@
 
 /* базовые настройки страницы */
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #fcf4f5;
   color: #000;
   line-height: 1.5;
 }
