@@ -23,4 +23,22 @@
     padding: 5px 10px;
     font-size: 12px;
   }
+
+  .task-edit-form,
+  .task-item_edit {
+    flex-wrap: wrap;
+    gap: 8px;       
+  }
+
+  .task-edit-form input,
+  .task-item_edit input {
+    flex: 1 1 100%; 
+    width: 100%;
+    box-sizing: border-box; 
+  }
+
+  .task-edit-form button,
+  .task-item_edit button {
+    flex: 1 1 45%; 
+  }
 }
